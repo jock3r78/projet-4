@@ -370,26 +370,7 @@ class PostController extends Controller
         ));
     }
 
-    /**
-     *
-     * @Route("/{id}/report", name="comment_report")
-     *
-     */
-    public function reportAction(Comment $comment)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $com = $em->getRepository('AppBundle:Comment')->find($comment->getId());
-        $report = $com->getReport();
-        $post = $com->getPost();
-        $report = $report + 1;
-        $com->setReport($report);
-        $em->persist($com);
-        $em->flush();
-        return $this->redirectToRoute('BlogBundle:Default:show.html.twig', array(
-            'id' => $post->getId()
-        ));
 
-    }
 
     /**
      * about.
@@ -402,5 +383,44 @@ class PostController extends Controller
 
         return $this->render('BlogBundle:Default:about.html.twig');
 
+    }
+
+    /**
+     *
+     * @Route("/{id}/report", name="comment_report")
+     *
+     */
+    public function reportAction(Comment $comment)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $com = $em->getRepository('BlogBundle:Comment')->find($comment->getId());
+        $report = $com->getReport();
+        $post = $com->getPost();
+        $report = $report + 1;
+        $com->setReport($report);
+        $em->persist($com);
+        $em->flush();
+        return $this->redirectToRoute('post_show', array(
+            'id' => $post->getId()
+        ));
+
+    }
+
+    /**
+     * @Route("/admin/comment/moderate/{id}", name="comment_moderate")
+     *
+     */
+    public function moderateAction(Comment $comment)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $com = $em->getRepository('BlogBundle:Comment')->find(array('id' => $comment->getId()));
+
+        $com->setName(' XXXXXXXXXXX');
+        $com->setContent('Ce commentaire a été modéré - Contenu jugé abusif');
+        $com->setReport(0);
+        $em->persist($com);
+        $em->flush();
+
+        return $this->redirectToRoute('admin_index');
     }
 }

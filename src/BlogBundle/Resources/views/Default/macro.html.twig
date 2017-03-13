@@ -9,7 +9,7 @@
             <div class="background-color-clouds pd-10">
               <p class="mg-0">Commentaire de <span class="text-bold">{{ comment.username }}</span>
                     le {{ comment.getCreatedAt()|date("d/m/Y H:i") }}
-                    <a href="#" class="reportComment float-right" class="mg-l-15"
+                    <a href="{{ path('comment_report', { 'id': comment.id }) }}" id="{{ comment.id }}" class="reportComment float-right" class="mg-l-15"
                        title="Signaler ce commentaire comment étant inapproprié"
                        onclick="setReport({{ comment.id }})"><i class="glyphicon glyphicon-alert"></i></a>
                 </p>

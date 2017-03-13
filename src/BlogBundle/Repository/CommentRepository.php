@@ -42,4 +42,21 @@ class CommentRepository extends \Doctrine\ORM\EntityRepository
             ;
     }
 
+    public  function getMostReported($min) {
+        return $this->createQueryBuilder('c')
+            ->where('c.report > :min')
+            ->setParameter('min',$min)
+            ->getQuery()
+            ->getResult();
+    }
+
+
+    public  function getNbMostReported($min) {
+        return $this->createQueryBuilder('c')
+            ->select('COUNT(c)')
+            ->where('c.report > :min')
+            ->setParameter('min',$min)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 }
