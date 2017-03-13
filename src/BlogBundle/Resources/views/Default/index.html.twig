@@ -1,34 +1,47 @@
 {% extends("::layout/layout-home.html.twig") %}
 
 {% block body %}
+{% for post in posts %}
+    <!-- content -->
     <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                {% for post in posts %}
-                <div class="post-preview">
-                    <h3>
-                        Episode :  <a href="{{ path('post_show', {id: post.id}) }}">
-                            {{ post.episode }}
-                        </a>
-                    </h3>
-                        <h2 class="post-title">
-                            {{ post.name }}
-                        </h2>
-                    </a>
-                    <img src="{{ post.photoresume }}" alt="" class="img-responsive"/>
-                    {{ post.content|striptags|truncate(80)| raw  }}<p><a href="{{ path('post_show', {id: post.id}) }}">Lire la suite</a></p>
-                  </div>
-                <hr>
-                {% endfor %}
-                <!-- Pager -->
+        <div class="content">
+            <div class="travelling">
+                <div class="col-md-10 travelling1">
+                    <h1><a href="{{ path('post_show', {id: post.id}) }}">{{ post.name }}</a></h1>
+                    <h2>Episode :  {{ post.episode }}</h2>
+                    <h5>Ecrit par : <a href="#">{{ post.user.username }}</a></h5>
+                    <br>
 
-                <div class="text-center">
-                    {{ knp_pagination_render(posts) }}
+                    <img src="{{ post.photoresume }}" alt="" class="img-responsive"/>
+                    <br>
+                    <hr>
+                    <p>{{ post.content|truncate(100)|raw  }}....</p>
+                    <br>
+                    <h5>Publié le: {{ post.createdAt|date("m/d/Y") }}</h5>
                 </div>
+                <div class="col-md-1 travelling2">
+                </div>
+                <div class="clearfix"></div>
+            </div>
+
+
+            <div class="lequotes">
+
+                <div class="col-md-12">
+                    <a class="more" href="{{ path('post_show', {id: post.id}) }}">Lire la suite</a>
+                </div>
+
+
             </div>
         </div>
     </div>
-    <hr>
+{% endfor %}
 
+<!-- content -->
+<!-- Pager -->
+<div class="text-center">
+        {{ knp_pagination_render(posts) }}
+</div>
 {% endblock %}
+
 
