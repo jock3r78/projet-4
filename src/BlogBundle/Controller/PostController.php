@@ -390,4 +390,17 @@ class PostController extends Controller
         ));
 
     }
+
+    /**
+     * about.
+     *
+     * @Route("/about", name="about")
+     * @Method("GET")
+     */
+    public function aboutAction()
+    {
+
+        return $this->render('BlogBundle:Default:about.html.twig');
+
+    }
 }
