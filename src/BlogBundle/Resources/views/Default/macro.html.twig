@@ -3,23 +3,23 @@
     {% import _self as self %}
     {% for comment in comments %}
 
-            <div class="col-md-2"><img
-                        src="https://www.gravatar.com/avatar/6a6c19fea4a3676970167ce51f39e6ee?d=mm&s=100"></div>
-            <div class="col-md-10 mg-b-50">
-                <div class="background-color-clouds pd-10">
-                    <p class="mg-0">Commentaire de <span class="text-bold">{{ comment.username }}</span>
-                        le {{ comment.getCreatedAt()|date("d/m/Y H:i") }}
-                        <a href="#" class="reportComment float-right" class="mg-l-15"
-                           title="Signaler ce commentaire comment étant inapproprié"
-                           onclick="setReport({{ comment.id }})"><i class="glyphicon glyphicon-alert"></i></a>
-                    </p>
-                    <p>{{ comment.content }}</p>
-                    {%  if comment.level < 3 %}
+        <div class="col-md-2"><img
+                    src="https://www.gravatar.com/avatar/6a6c19fea4a3676970167ce51f39e6ee?d=mm&s=100"></div>
+        <div class="col-md-10 mg-b-50">
+            <div class="background-color-clouds pd-10">
+              <p class="mg-0">Commentaire de <span class="text-bold">{{ comment.username }}</span>
+                    le {{ comment.getCreatedAt()|date("d/m/Y H:i") }}
+                    <a href="#" class="reportComment float-right" class="mg-l-15"
+                       title="Signaler ce commentaire comment étant inapproprié"
+                       onclick="setReport({{ comment.id }})"><i class="glyphicon glyphicon-alert"></i></a>
+                </p>
+                <p>{{ comment.content }}</p>
+                {%  if comment.level < 3 %}
                     <p><a href="#" data-toggle="modal" data-target="#{{ comment.id }}resp">Répondre</a></p>
-                    {% endif %}
-                </div>
+                {% endif %}
             </div>
-                    {%  if comment.level < 3 %}
+        </div>
+        {%  if comment.level < 3 %}
             <div class="modal fade" id="{{ comment.id }}resp" role="dialog">
                 <div class="modal-dialog">
                     <!-- Modal content-->
@@ -34,12 +34,12 @@
                     </div>
                 </div>
             </div>
-                 {% endif %}
+        {% endif %}
 
-            <div class="mg-l-50">
-                     {{ self.comments(comment.children) }}
+        <div class="mg-l-50">
+            {{ self.comments(comment.children) }}
 
-            </div>
+        </div>
 
     {% endfor %}
 

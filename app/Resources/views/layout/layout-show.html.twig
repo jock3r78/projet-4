@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Jean Forteroche</title>
+    <link href="{{ asset('global/css/bootstrap.css')}}" rel="stylesheet" type="text/css" media="all">
+    <link href="{{ asset('global/css/style.css')}}" rel="stylesheet" type="text/css" media="all" />
+    <link href="{{ asset('global/css/blog.css')}}" rel="stylesheet" type="text/css" media="all" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,800,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <script src="{{ asset('global/js/jquery.min.js')}}"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<!-- header -->
+<div class="banner">
+    <div class="container">
+        <div class="logo">
+            <h1 class="titre">Jean Forteroche</h1>
+            <br>
+            <h2 class="soustitre">Billet simple pour l'Alaska</h2>
+        </div>
+    </div>
+    <div class="header-bottom">
+        <div class="container">
+            <div class="head-nav">
+                <span class="menu"> </span>
+                <ul>
+                    <li class="active"><a href="{{ path('post_index') }}">Accueil</a></li>
+                    <li><a href="{{ path('about') }}">A propos de l'auteur</a></li>
+                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                        <li><a href="{{ path('admin_show') }}"><i class="fa fa-lock"></i> Panneau </a></li> /
+                        <li><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
+                    {% else %}
+                        <li><a href="{{ path('fos_user_security_login') }}">Connexion </a></li>
+                    {% endif %}
+                    <div class="clearfix"> </div>
+                </ul>
+            </div>
+            <!-- script-for-nav -->
+            <script>
+                $( "span.menu" ).click(function() {
+                    $( ".head-nav ul" ).slideToggle(300, function() {
+                        // Animation complete.
+                    });
+                });
+            </script>
+            <!-- script-for-nav -->
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+</div>
+<!-- header -->
+<!-- Content-->
+<div class="container">
+    <br>
+    <div class="content">
+
+    {% block body %}
+
+    {% endblock %}
+        <div class="clearfix"> </div>
+    </div>
+</div>
+<!-- content -->
+<!-- footer -->
+<div class="footer">
+    <div class="container">
+        <p>Conception par  <a href="http://jonathancassara.fr" target="_blank"> JonathanCassara.fr</a></p>
+        <div class="social">
+            <ul>
+                <li><a href="#"><i class="fb"> </i> </li></a>
+                <li><a href="#"><i class="twt"> </i> </li></a>
+                <div class="clearfix"></div>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- footer -->
+</body>
+</html>
