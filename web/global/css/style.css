@@ -19,7 +19,7 @@ body a{
 	-ms-transition:0.5s all;
 }
 .banner{
-	background: url(../images/banner.jpg) no-repeat center top;
+	background: url(../images/banniere.jpg) no-repeat center top;
 	background-size: cover;
 	-webkit-background-size:cover; 
 	-moz-background-size:cover;
@@ -1113,4 +1113,27 @@ a.load {
 .head-nav ul li a {
 	font-size: 1.2em;
 }
+}
+h1.titre {
+	font-size: 100px;
+	text-shadow: -1px -1px #9df, 1px 1px #49d, -3px 0 4px #000;
+	font-family:"Pacifico", Arial, Helvetica, sans-serif;
+	color: rgba(102, 187, 255, 0);
+	padding:24px 32px 32px 32px;
+	font-weight:lighter;
+	text-align:center;
+	display:inline;
+	line-height:150px;
+}
+
+h2.soustitre {
+	font-size: 50px;
+	text-shadow: -1px -1px #9df, 1px 1px #49d, -3px 0 4px #000;
+	font-family: Arial, Helvetica, sans-serif;
+	color: rgba(102, 187, 255, 0);
+	padding:24px 32px 32px 32px;
+	font-weight:lighter;
+	text-align:center;
+	display:inline;
+	line-height:150px;
 }
