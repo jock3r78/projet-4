@@ -25,7 +25,7 @@
             <div class="head-nav">
                 <span class="menu"> </span>
                 <ul>
-                    <li class="active"><a href="#">Accueil</a></li>
+                    <li class="active"><a href="{{ path('post_index') }}">Accueil</a></li>
                     <li><a href="{{ path('about') }}">A propos de l'auteur</a></li>
                     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                     <li><a href="{{ path('admin_show') }}"><i class="fa fa-lock"></i> Panneau </a></li> /
