@@ -415,12 +415,12 @@ class PostController extends Controller
         $em = $this->getDoctrine()->getManager();
         $com = $em->getRepository('BlogBundle:Comment')->find(array('id' => $comment->getId()));
 
-        $com->setName(' XXXXXXXXXXX');
+        $com->setUsername(' XXXXXXXXXXX');
         $com->setContent('Ce commentaire a été modéré - Contenu jugé abusif');
         $com->setReport(0);
         $em->persist($com);
         $em->flush();
 
-        return $this->redirectToRoute('admin_index');
+        return $this->redirectToRoute('admin_comments');
     }
 }
