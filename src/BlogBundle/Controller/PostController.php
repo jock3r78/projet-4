@@ -9,6 +9,7 @@ use BlogBundle\Form\PostType;
 use BlogBundle\Entity\User;
 use BlogBundle\Entity\Category;
 use BlogBundle\Entity\Comment;
+use FOS\UserBundle\Doctrine\UserManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -423,4 +424,7 @@ class PostController extends Controller
 
         return $this->redirectToRoute('admin_comments');
     }
+
+
+
 }

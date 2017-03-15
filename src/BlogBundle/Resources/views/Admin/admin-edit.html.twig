@@ -18,6 +18,27 @@
             </div>
             <div class="col-md-6">
                 <div class="form-group">
+                    {{ form_label(form.episode, "Episode") }}
+                    {{ form_errors(form.episode) }}
+                    {{ form_widget(form.episode, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    {{ form_label(form.photo, "Photo") }}
+                    {{ form_errors(form.photo) }}
+                    {{ form_widget(form.photo, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    {{ form_label(form.photoresume, "Photo résumé") }}
+                    {{ form_errors(form.photoresume) }}
+                    {{ form_widget(form.photoresume, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
                     {{ form_label(form.category, "Catégorie") }}
                     {{ form_errors(form.category) }}
                     {{ form_widget(form.category, {'attr': {'class': 'form-control'}}) }}
