@@ -25,13 +25,16 @@ class Post
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="posts", cascade={"persist"})
+     * @Assert\NotNull()
+     * @Assert\NotBlank()
      */
     private $user;
 
 
     /**
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="posts", cascade={"persist"})
-     * 
+     * @Assert\NotNull()
+     * @Assert\NotBlank()
      */
     private $category;
 
@@ -41,6 +44,8 @@ class Post
      *
      * @ORM\Column(name="name", type="string", length=255)
      * @Assert\Length(min=5)
+     * @Assert\NotNull()
+     * @Assert\NotBlank()
      */
     private $name;
 
@@ -79,6 +84,8 @@ class Post
      * @var smallint
      *
      * @ORM\Column(name="episode", type="smallint")
+     * @Assert\NotNull()
+     * @Assert\NotBlank()
      */
     private $episode;
 

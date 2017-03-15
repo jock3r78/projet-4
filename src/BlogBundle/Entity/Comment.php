@@ -47,6 +47,8 @@ class Comment
      *
      * @ORM\Column(name="username", type="string", length=255)
      * @Assert\Length(min=3)
+     * @Assert\NotNull()
+     * @Assert\NotBlank()
      */
     private $username;
 
@@ -55,6 +57,8 @@ class Comment
      *
      * @ORM\Column(name="email", type="string", length=255)
      * @Assert\Email()
+     * @Assert\NotNull()
+     * @Assert\NotBlank()
      */
     private $email;
 
@@ -63,6 +67,8 @@ class Comment
      *
      * @ORM\Column(name="content", type="text")
      * @Assert\NotBlank()
+     * @Assert\NotNull()
+     * 
      */
     private $content;
 
