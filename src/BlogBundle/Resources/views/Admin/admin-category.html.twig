@@ -17,7 +17,6 @@
                     <tr class="warning">
                         <th>ID</th>
                         <th>Catégories</th>
-                        <th>Nombres d'épisodes</th>
                         <th class="text-center">Actions</th>
                     </tr>
                     </thead>
@@ -26,7 +25,6 @@
                         <tr>
                             <td>{{ category.id }}</td>
                             <td>{{ category.name }}</td>
-                            <td>{{ category.numberPost}}</td>
                             <td>
                                 <div class="col-sm-5"><a href="{{ path('admin_comment_edit', {id: category.id}) }}"
                                                          class="btn btn-info">Éditer</a></div>
