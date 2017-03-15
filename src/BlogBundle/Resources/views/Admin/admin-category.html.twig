@@ -26,7 +26,7 @@
                             <td>{{ category.id }}</td>
                             <td>{{ category.name }}</td>
                             <td>
-                                <div class="col-sm-5"><a href="{{ path('admin_comment_edit', {id: category.id}) }}"
+                                <div class="col-sm-5"><a href="{{ path('admin_category_edit', {id: category.id}) }}"
                                                          class="btn btn-info">Éditer</a></div>
                                 <div class="col-sm-5">
                                     <button type="button" class="btn btn-danger" data-toggle="modal"
@@ -51,7 +51,7 @@
                                                     </button>
                                                 </div>
                                                 <div class="col-md-6 text-center">
-                                                    <form action="{{ path('admin_comment_delete') }}" method="post">
+                                                    <form action="{{ path('admin_category_delete') }}" method="post">
                                                         <input type="submit" class="btn btn-danger" value="Valider"/>
                                                         <input name="COMMENT_ID" type="hidden" value="{{ category.id }}"/>
                                                         {{ form_rest(form) }}
