@@ -265,17 +265,17 @@ class PostController extends Controller
      */
     public function deleteCommentAction(Request $request)
     {
-        if ($request->isXmlHttpRequest()) {
-            $data = $request->request->all();
-            $id = $data['Comment_ID'];
-        }
-
         $em = $this->getDoctrine()->getManager();
+        $id = $request->request->get('COMMENT_ID');
+
+
         $comment = $em->getRepository('BlogBundle:Comment')->find($id);
         $em->remove($comment);
-        $em->flush();
+        $this->addFlash('success', 'Votre article a été supprimé avec succès !');
+        $em->flush($comment);
 
-        return new Response('success');
+        return $this->redirectToRoute('admin_comments');
+
     }
 
     /**
