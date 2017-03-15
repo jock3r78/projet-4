@@ -68,7 +68,7 @@ class Comment
      * @ORM\Column(name="content", type="text")
      * @Assert\NotBlank()
      * @Assert\NotNull()
-     * 
+     *
      */
     private $content;
 

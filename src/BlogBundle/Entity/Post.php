@@ -84,8 +84,9 @@ class Post
      * @var smallint
      *
      * @ORM\Column(name="episode", type="smallint")
-     * @Assert\NotNull()
-     * @Assert\NotBlank()
+     * @Assert\NotNull(message = "valeur nulle impossible, Merci de saissir un numéro d'épisode")
+     * @Assert\NotBlank(message = "valeur vide interdite, Merci de saissir un numéro d'épisode")
+     *
      */
     private $episode;
 
