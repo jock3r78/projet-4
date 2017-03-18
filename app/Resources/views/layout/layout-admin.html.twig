@@ -59,6 +59,14 @@
                     <i class="fa fa-user fa-fw"></i> {{ app.user.username }} <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu dropdown-user">
+                    <li><a href="{{ path('fos_user_profile_show')}}"><i class="fa fa-user fa-fw"></i>Profile</a>
+                    </li>
+                    <li><a href="{{ path('fos_user_profile_edit')}}"><i class="fa fa-user fa-fw"></i>Edition</a>
+                    </li>
+                    <li><a href="{{ path('fos_user_change_password')}}"><i class="fa fa-user fa-fw"></i>Mot De Passe</a>
+                    </li>
+                    <li><a href="{{ path('fos_user_registration_register')}}"><i class="fa fa-gear fa-fw"></i>Ajouter un utilisateur</a>
+                    </li>
                     <li class="divider"></li>
                     <li><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out fa-fw"></i>
                             Déconnexion</a>

@@ -112,3 +112,8 @@ fabric.properties
 /web/js/
 
 # End of https://www.gitignore.io/api/phpstorm,composer,symfony
+.idea/php.xml
+
+.idea/commandlinetools/Symfony_18_03_17_12_02_s.xml
+
+.idea/php.xml
