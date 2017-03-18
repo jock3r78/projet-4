@@ -104,6 +104,14 @@ class Post
      */
     private $photo;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="published", type="boolean")
+     * @Assert\NotNull()
+     */
+    private $published = 1 ;
+
 
     /**
      * Get id
@@ -385,5 +393,29 @@ class Post
     public function getPhoto()
     {
         return $this->photo;
+    }
+
+    /**
+     * Set published
+     *
+     * @param boolean $published
+     *
+     * @return Post
+     */
+    public function setPublished($published)
+    {
+        $this->published = $published;
+
+        return $this;
+    }
+
+    /**
+     * Get published
+     *
+     * @return boolean
+     */
+    public function getPublished()
+    {
+        return $this->published;
     }
 }
