@@ -1,9 +1,11 @@
-{% extends("::layout/layout-home.html.twig") %}
+{% extends("::layout/layout-show.html.twig") %}
 
 {% block body %}
     <!-- content -->
+{%  if post.published == true %}
 
-
+    <div class="container">
+    <div class="content">
             <a href="{{ path('post_show', {id: post.id}) }}"><img src="{{ post.photo }}" class="img-responsive" alt="" /></a>
             <i class="aeroplane"> </i>
             <div class="travelling">
@@ -34,8 +36,10 @@
                 {% import "BlogBundle:Default:macro.html.twig" as macros %}
 
                 {{ macros.comments(comments) }}
-
+                <div class="clearfix"> </div>
         </div>
-
+    </div>
+    </div>
+{% endif %}
     <!-- content -->
 {% endblock %}

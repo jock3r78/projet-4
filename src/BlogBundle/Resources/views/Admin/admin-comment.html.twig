@@ -3,7 +3,7 @@
 {% block body %}
     <div class="container">
         <div class="row">
-            <div class="col-sm-12">
+            <div class="col-sm-11">
                 {% for message in app.session.flashbag.get('success') %}
                     <div class="alert alert-dismissible alert-success" id="success" style="display: none;">
                         <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -17,10 +17,10 @@
                     <tr class="warning">
                         <th>ID</th>
                         <th>Nom</th>
-                        <th class="text-center">Dates de publications</th>
-                        <th class="text-center">Commentaires</th>
-                        <th class="text-center">Signalement</th>
-                        <th class="text-center">Actions</th>
+                        <th>Dates de publications</th>
+                        <th>Commentaires</th>
+                        <th>Signalement</th>
+                        <th>Actions</th>
                     </tr>
                     </thead>
                     <tbody>

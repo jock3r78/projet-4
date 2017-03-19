@@ -26,11 +26,11 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
         $userManager = $this->container->get('fos_user.user_manager');
         // Create our user and set details
         $user = $userManager->createUser();
-        $user->setUsername('Jeanforteroche');
-        $user->setEmail('jean@forteroche.com');
-        $user->setPlainPassword('admin');
+        $user->setUsername('Jeanneforteroche');
+        $user->setEmail('jeanne@forteroche.com');
+        $user->setPlainPassword('auteur');
         $user->setEnabled(true);
-        $user->setRoles(array('ROLE_ADMIN'));
+        $user->setRoles(array('ROLE_AUTEUR'));
 
         // Update the user
         $userManager->updateUser($user, true);

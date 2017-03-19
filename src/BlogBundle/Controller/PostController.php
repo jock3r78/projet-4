@@ -19,6 +19,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 
+
 /**
  * Post controller.
  *
@@ -35,7 +36,7 @@ class PostController extends Controller
     public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $query = $em->getRepository('BlogBundle:Post')->getPostWithCategoryAndUserQuery();
+        $query = $em->getRepository('BlogBundle:Post')->getAllPosts();
         $posts = $this->get('knp_paginator')->paginate(
             $query,
             $request->query->getInt('page', 1),
@@ -176,7 +177,7 @@ class PostController extends Controller
     public function adminAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $posts = $em->getRepository('BlogBundle:Post')->getPostWithCategoryAndUser();
+        $posts = $em->getRepository('BlogBundle:Post')->getAllPosts();
         $form = $this->get('form.factory')->create();
 
         return $this->render('BlogBundle:Admin:admin-index.html.twig', array(
@@ -238,24 +239,7 @@ class PostController extends Controller
         ));
     }
 
-    /**
-     * Deletes a post entity.
-     *
-     * @Route("/admin/delete", name="admin_post_delete")
-     * @Method("POST")
-     */
-    public function deleteAction(Request $request)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $id = $request->request->get('POST_ID');
 
-        $post = $em->getRepository('BlogBundle:Post')->find($id);
-        $em->remove($post);
-        $this->addFlash('success', 'Votre article a été supprimé avec succès !');
-        $em->flush($post);
-
-        return $this->redirectToRoute('admin_show');
-    }
 
     /**
      * Deletes a comment entity.
@@ -271,7 +255,7 @@ class PostController extends Controller
 
         $comment = $em->getRepository('BlogBundle:Comment')->find($id);
         $em->remove($comment);
-        $this->addFlash('success', 'Votre article a été supprimé avec succès !');
+        $this->addFlash('success', 'Votre commentaire a été supprimé avec succès !');
         $em->flush($comment);
 
         return $this->redirectToRoute('admin_comments');
@@ -373,18 +357,7 @@ class PostController extends Controller
 
 
 
-    /**
-     * about.
-     *
-     * @Route("/about", name="about")
-     * @Method("GET")
-     */
-    public function aboutAction()
-    {
 
-        return $this->render('BlogBundle:Default:about.html.twig');
-
-    }
 
     /**
      *
@@ -469,6 +442,44 @@ class PostController extends Controller
 
         return $this->redirectToRoute('admin_category');
 
+    }
+
+
+    /**
+     * about.
+     *
+     * @Route("/about", name="about")
+     * @Method("GET")
+     */
+    public function aboutAction()
+    {
+
+
+        return $this->render('BlogBundle:Default:about.html.twig');
+
+    }
+
+    /**
+     * Deletes a post entity.
+     *
+     * @Route("/admin/delete", name="admin_post_delete")
+     * @Method("POST")
+     */
+    public function deleteAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $id = $request->request->get('POST_ID');
+
+        $post = $em->getRepository('BlogBundle:Post')->find($id);
+
+        foreach ( $post->getComments() as $com){
+            $post->removeComment($com);
+        }
+        $em->remove($post);
+        $this->addFlash('success', 'Votre article a été supprimé avec succès !');
+        $em->flush($post);
+
+        return $this->redirectToRoute('admin_show');
     }
 
 }

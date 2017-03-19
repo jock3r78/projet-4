@@ -9,55 +9,67 @@
         <div class="row">
             {{ form_start(form) }}
             {{ form_errors(form) }}
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="form-group">
                     {{ form_label(form.name, "Titre") }}
                     {{ form_errors(form.name) }}
                     {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="form-group">
                     {{ form_label(form.episode, "Episode") }}
                     {{ form_errors(form.episode) }}
                     {{ form_widget(form.episode, {'attr': {'class': 'form-control'}}) }}
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-2">
+                <div class="form-group">
+                    {{ form_label(form.published, "Publication") }}
+                    {{ form_errors(form.published) }}
+                    {{ form_widget(form.published, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
                 <div class="form-group">
                     {{ form_label(form.photo, "Photo") }}
                     {{ form_errors(form.photo) }}
                     {{ form_widget(form.photo, {'attr': {'class': 'form-control'}}) }}
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-3">
                 <div class="form-group">
                     {{ form_label(form.photoresume, "Photo résumé") }}
                     {{ form_errors(form.photoresume) }}
                     {{ form_widget(form.photoresume, {'attr': {'class': 'form-control'}}) }}
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-2">
                 <div class="form-group">
                     {{ form_label(form.category, "Catégorie") }}
                     {{ form_errors(form.category) }}
                     {{ form_widget(form.category, {'attr': {'class': 'form-control'}}) }}
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-2">
                 <div class="form-group">
                     {{ form_label(form.user, "Auteur") }}
                     {{ form_errors(form.user) }}
                     {{ form_widget(form.user, {'attr': {'class': 'form-control'}}) }}
                 </div>
             </div>
-            <div class="col-md-12">
+        </div>
+        <div class="row">
+            <div class="col-md-10">
                 <div class="form-group">
                     {{ form_label(form.content, "Contenu") }}
                     {{ form_errors(form.content) }}
-                    {{ form_widget(form.content, {'attr': {'class': 'form-control', 'rows': '5'}}) }}
+                    {{ form_widget(form.content, {'attr': {'class': 'form-control', 'rows': '25'}}) }}
                 </div>
             </div>
+        </div>
             <div class="form-group">
                 <div class="col-sm-12">
                     {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary'}}) }}
@@ -66,10 +78,9 @@
             {{ form_rest(form) }}
         {{ form_end(form) }}
         </div>
-    </div>
 {% endblock %}
 
 {% block script %}
-    <script src="{{ asset('js/tinymce.min.js') }}"></script>
+    <script src="{{ asset('admin/js/tinymce/tinymce.min.js') }}"></script>
     <script>tinymce.init({ selector:'textarea' });</script>
 {% endblock %}

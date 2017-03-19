@@ -80,7 +80,7 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
     public function getAllPosts()
     {
         return $this->createQueryBuilder('p')
-            ->orderBy('p.createdAt', 'DESC')
+            ->orderBy('p.episode', 'DESC')
             ->getQuery()
             ->getResult()
             ;
@@ -89,7 +89,7 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
     public function getPosts()
     {
         return $this->createQueryBuilder('p')
-            ->orderBy('p.createdAt', 'DESC')
+            ->orderBy('p.episode', 'DESC')
             ;
     }
 }

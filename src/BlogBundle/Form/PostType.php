@@ -11,6 +11,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 class PostType extends AbstractType
@@ -21,7 +22,7 @@ class PostType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $this->user = $options['user'];
-        if($this->user == 'Admin'){
+        if($this->user == 'Jeanforteroche'){
             $builder
                 ->add('name', TextType::class)
                 ->add('content', TextareaType::class)
@@ -33,6 +34,11 @@ class PostType extends AbstractType
                 ->add('episode', IntegerType::class)
                 ->add('photo', TextType::class)
                 ->add('photoresume', TextType::class)
+                ->add('published', ChoiceType::class, array(
+                    'choices' => array(
+                        'Oui' => true,
+                        'Non' => false,
+                    )))
                 ->add('submit', SubmitType::class, ['label' => 'Valider'])
             ;
         }
@@ -47,12 +53,21 @@ class PostType extends AbstractType
                         return $er->createQueryBuilder('u')
                             ->where('u.username = :username')
                             ->setParameter('username', $this->user);
-                       /* $er->createQueryBuilder('u')
-                            ->where('u.roles LIKE :roles')
-                            ->setParameter('roles', '%"'.$this->user.'"%');*/
+                        /* $er->createQueryBuilder('u')
+                             ->where('u.roles LIKE :roles')
+                             ->setParameter('roles', '%"'.$this->user.'"%');*/
                     },
                     'choice_label' => 'username',
                 ))
+                ->add('episode', IntegerType::class)
+                ->add('photo', TextType::class)
+                ->add('photoresume', TextType::class)
+                ->add('published', ChoiceType::class, array(
+                    'choices' => array(
+                        'Oui' => true,
+                        'Non' => false,
+                    )))
+
                 ->add('submit', SubmitType::class, ['label' => 'Valider'])
             ;
         }

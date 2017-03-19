@@ -3,7 +3,7 @@
 {% block body %}
     <div class="container">
         <div class="row">
-            <div class="col-sm-12">
+            <div class="col-sm-8">
                 {% for message in app.session.flashbag.get('success') %}
                     <div class="alert alert-dismissible alert-success" id="success" style="display: none;">
                         <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -15,15 +15,13 @@
                 <table class="table table-striped">
                     <thead>
                     <tr class="warning">
-                        <th>ID</th>
                         <th>Catégories</th>
-                        <th class="text-center">Actions</th>
+                        <th>Actions</th>
                     </tr>
                     </thead>
                     <tbody>
                     {% for category in category %}
                         <tr>
-                            <td>{{ category.id }}</td>
                             <td>{{ category.name }}</td>
                             <td>
                                 <div class="col-sm-5"><a href="{{ path('admin_category_edit', {id: category.id}) }}"

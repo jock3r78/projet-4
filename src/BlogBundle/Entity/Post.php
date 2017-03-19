@@ -76,16 +76,16 @@ class Post
     /**
      * @var string
      *
-     * @ORM\OneToMany(targetEntity="Comment", mappedBy="post", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="post", cascade={"persist"}, orphanRemoval=true)
      */
     private $comments;
 
     /**
-     * @var smallint
+     * @var int
      *
      * @ORM\Column(name="episode", type="smallint")
-     * @Assert\NotNull(message = "valeur nulle impossible, Merci de saissir un numéro d'épisode")
-     * @Assert\NotBlank(message = "valeur vide interdite, Merci de saissir un numéro d'épisode")
+     * @Assert\NotBlank( message="champs vide, merci de mettre un numéro")
+     * @Assert\NotNull(message=" champs null, merci de mettre un numéro")
      *
      */
     private $episode;
@@ -108,9 +108,8 @@ class Post
      * @var string
      *
      * @ORM\Column(name="published", type="boolean")
-     * @Assert\NotNull()
      */
-    private $published = 1 ;
+    private $published = true;
 
 
     /**
@@ -242,6 +241,7 @@ class Post
     {
         return $this->comments;
     }
+
     /**
      * Constructor
      */
@@ -323,29 +323,6 @@ class Post
         return $this->category;
     }
 
-    /**
-     * Set episode
-     *
-     * @param integer $episode
-     *
-     * @return Post
-     */
-    public function setEpisode($episode)
-    {
-        $this->episode = $episode;
-
-        return $this;
-    }
-
-    /**
-     * Get episode
-     *
-     * @return integer
-     */
-    public function getEpisode()
-    {
-        return $this->episode;
-    }
 
     /**
      * Set photoresume
@@ -417,5 +394,29 @@ class Post
     public function getPublished()
     {
         return $this->published;
+    }
+
+    /**
+     * Set episode
+     *
+     * @param string $episode
+     *
+     * @return Post
+     */
+    public function setEpisode($episode)
+    {
+        $this->episode = $episode;
+
+        return $this;
+    }
+
+    /**
+     * Get episode
+     *
+     * @return string
+     */
+    public function getEpisode()
+    {
+        return $this->episode;
     }
 }
