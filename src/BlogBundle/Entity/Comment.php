@@ -46,28 +46,18 @@ class Comment
      * @var string
      *
      * @ORM\Column(name="username", type="string", length=255)
-     * @Assert\Length(min=3)
-     * @Assert\NotNull()
-     * @Assert\NotBlank()
+     * @Assert\Length(min=3, minMessage="merci de mettre plus de 3 caractères")
+     * @Assert\NotNull(message="Merci de remplir ce champs")
+     * @Assert\NotBlank(message="Merci de remplir ce champs")
      */
     private $username;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=255)
-     * @Assert\Email()
-     * @Assert\NotNull()
-     * @Assert\NotBlank()
-     */
-    private $email;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="content", type="text")
-     * @Assert\NotBlank()
-     * @Assert\NotNull()
+     * @Assert\NotBlank(message="Merci de remplir ce champs")
+     * @Assert\NotNull(message="Merci de remplir ce champs")
      *
      */
     private $content;
