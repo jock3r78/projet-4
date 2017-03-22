@@ -16,6 +16,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 
@@ -49,25 +50,7 @@ class PostController extends Controller
 
     }
 
-    /**
-     * Finds and displays a post entity.
-     *
-     * @Route("/{id}", name="post_show", requirements={"id": "\d+"})
-     * @Method("GET")
-     */
-    public function showAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $post = $em->getRepository('BlogBundle:Post')->getOnePostWithCategoryAndUserAndComment($id);
 
-        $comments = $em->getRepository('BlogBundle:Comment')->findBy(array('parent' => null, 'post' => $post));
-
-
-        return $this->render('BlogBundle:Default:show.html.twig', array(
-            'post' => $post,
-            'comments' => $comments,
-        ));
-    }
 
     /**
      *
@@ -480,6 +463,26 @@ class PostController extends Controller
         $em->flush($post);
 
         return $this->redirectToRoute('admin_show');
+    }
+
+    /**
+     * Finds and displays a post entity.
+     *
+     * @Route("/{id}", name="post_show", requirements={"id": "\d+"})
+     * @Method("GET")
+     */
+    public function showAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $post = $em->getRepository('BlogBundle:Post')->getOnePostWithCategoryAndUserAndComment($id);
+
+        $comments = $em->getRepository('BlogBundle:Comment')->findBy(array('parent' => null, 'post' => $post));
+
+
+        return $this->render('BlogBundle:Default:show.html.twig', array(
+            'post' => $post,
+            'comments' => $comments,
+        ));
     }
 
 }
