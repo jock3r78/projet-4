@@ -357,6 +357,10 @@ class PostController extends Controller
         $com->setReport($report);
         $em->persist($com);
         $em->flush();
+        $this->addFlash(
+            'report',
+            'Votre signalement a été pris en compte, Merci.'
+        );
         return $this->redirectToRoute('post_show', array(
             'id' => $post->getId()
         ));
@@ -477,6 +481,7 @@ class PostController extends Controller
         $post = $em->getRepository('BlogBundle:Post')->getOnePostWithCategoryAndUserAndComment($id);
 
         $comments = $em->getRepository('BlogBundle:Comment')->findBy(array('parent' => null, 'post' => $post));
+
 
 
         return $this->render('BlogBundle:Default:show.html.twig', array(
