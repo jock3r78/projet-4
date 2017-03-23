@@ -52,35 +52,6 @@ class PostController extends Controller
 
 
 
-    /**
-     *
-     * @Route("/{id}/add_comment", name="add_comment", requirements={"id": "\d+"})
-     * @Method("POST")
-     */
-    public function addCommentAction(Request $request, Post $post)
-    {
-        $em = $this->getDoctrine()->getManager();
-        // Add comment
-        $comment = new Comment();
-        $form = $this->get('form.factory')->create(CommentType::class, $comment, array(
-            'action' => $this->generateUrl('add_comment', array('id' => $post->getId())),
-            'method' => 'POST',
-        ));
-
-        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
-            $comment->setPost($post);
-
-            $em->persist($comment);
-            $em->flush();
-            $this->addFlash('success', 'Votre commentaire a été ajouté avec succès !');
-
-            return $this->redirectToRoute('post_show', array('id' => $post->getId()));
-        }
-
-        return $this->render('BlogBundle:Default:add-comment.html.twig', array(
-            'form' => $form->createView()
-        ));
-    }
 
     /**
      *
@@ -472,20 +443,38 @@ class PostController extends Controller
     /**
      * Finds and displays a post entity.
      *
+     *
      * @Route("/{id}", name="post_show", requirements={"id": "\d+"})
-     * @Method("GET")
+     * @Method({"GET", "POST"})
      */
-    public function showAction($id)
+    public function showAction($id, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $post = $em->getRepository('BlogBundle:Post')->getOnePostWithCategoryAndUserAndComment($id);
 
         $comments = $em->getRepository('BlogBundle:Comment')->findBy(array('parent' => null, 'post' => $post));
+        // Add comment
+        $comment = new Comment();
+        $form = $this->get('form.factory')->create(CommentType::class, $comment, array(
+            'action' => $this->generateUrl('post_show', array('id' => $post->getId())),
+            'method' => 'POST',
+        ));
 
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+            $comment->setPost($post);
+
+            $em->persist($comment);
+            $em->flush();
+            $this->addFlash('success', 'Votre commentaire a été ajouté avec succès !');
+
+            return $this->redirectToRoute('post_show', array('id' => $post->getId()));
+        }
 
 
         return $this->render('BlogBundle:Default:show.html.twig', array(
+            'form' => $form->createView(),
             'post' => $post,
+
             'comments' => $comments,
         ));
     }
