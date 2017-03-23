@@ -41,7 +41,30 @@
                         <h4>Ecrire un commentaire</h4>
                         <div class="col-md-6 contact">
 
-                            {{ render(controller('BlogBundle:Post:addComment', {id: post.id})) }}
+                            {{ form_start(form) }}
+                            {{ form_errors(form) }}
+
+
+                            {{ form_label(form.username, "Nom:") }}
+
+                            {{ form_errors(form.username) }}
+
+                            {{ form_widget(form.username) }}
+
+
+                            {{ form_label(form.content, " Votre Commentaire:") }}
+
+                            {{ form_errors(form.content) }}
+
+                            {{ form_widget(form.content) }}
+                            <br>
+                            <div class="button">
+
+                                {{ form_widget(form.submit) }}
+                            </div>
+
+                            {{ form_rest(form) }}
+                            {{ form_end(form) }}
                         </div>
                         <div class="clearfix"> </div>
                     </div>
