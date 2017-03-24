@@ -5,6 +5,7 @@ namespace BlogBundle\Controller;
 use BlogBundle\BlogBundle;
 use BlogBundle\Entity\Post;
 use BlogBundle\Form\CommentType;
+use BlogBundle\Form\CategoryType;
 use BlogBundle\Form\PostType;
 use BlogBundle\Entity\User;
 use BlogBundle\Entity\Category;
@@ -49,89 +50,8 @@ class PostController extends Controller
 
     }
 
-    /**
-     * Finds and displays a post entity.
-     *
-     * @Route("/{id}", name="post_show", requirements={"id": "\d+"})
-     * @Method("GET")
-     */
-    public function showAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $post = $em->getRepository('BlogBundle:Post')->getOnePostWithCategoryAndUserAndComment($id);
-
-        $comments = $em->getRepository('BlogBundle:Comment')->findBy(array('parent' => null, 'post' => $post));
 
 
-        return $this->render('BlogBundle:Default:show.html.twig', array(
-            'post' => $post,
-            'comments' => $comments,
-        ));
-    }
-
-    /**
-     *
-     * @Route("/{id}/add_comment", name="add_comment", requirements={"id": "\d+"})
-     * @Method("POST")
-     */
-    public function addCommentAction(Request $request, Post $post)
-    {
-        $em = $this->getDoctrine()->getManager();
-        // Add comment
-        $comment = new Comment();
-        $form = $this->get('form.factory')->create(CommentType::class, $comment, array(
-            'action' => $this->generateUrl('add_comment', array('id' => $post->getId())),
-            'method' => 'POST',
-        ));
-
-        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
-            $comment->setPost($post);
-
-            $em->persist($comment);
-            $em->flush();
-            $this->addFlash('success', 'Votre commentaire a été ajouté avec succès !');
-
-            return $this->redirectToRoute('post_show', array('id' => $post->getId()));
-        }
-
-        return $this->render('BlogBundle:Default:add-comment.html.twig', array(
-            'form' => $form->createView()
-        ));
-    }
-
-    /**
-     *
-     *
-     * @Route("/{id}/add_comment/{comment_parent_id}", name="add_comment_response", requirements={"id": "\d+"})
-     * @Method("POST")
-     */
-    public function addCommentResponseAction(Request $request, Post $post, $comment_parent_id)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $commentParent = $em->getRepository('BlogBundle:Comment')->find($comment_parent_id);
-        // Add comment
-        $comment = new Comment();
-        $comment->setPost($post);
-        $comment->setLevel($commentParent->getLevel() + 1);
-        $comment->setParent($commentParent);
-        $form = $this->get('form.factory')->create(CommentType::class, $comment, array(
-            'action' => $this->generateUrl('add_comment_response', array('id' => $post->getId(), 'comment_parent_id' => $comment_parent_id)),
-            'method' => 'POST'
-        ));
-
-        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
-
-            $em->persist($comment);
-            $em->flush();
-            $this->addFlash('success', 'Votre réponse a été ajouté avec succès !');
-
-            return $this->redirectToRoute('post_show', array('id' => $post->getId()));
-        }
-
-        return $this->render('BlogBundle:Default:add-comment.html.twig', array(
-            'form' => $form->createView()
-        ));
-    }
 
     /**
      * Finds and displays author post entity.
@@ -399,30 +319,7 @@ class PostController extends Controller
     }
 
 
-    /**
-     * Displays a form to edit an existing category entity.
-     *
-     * @Route("/admin/category/edit/{id}", name="admin_category_edit")
-     * @Method({"GET", "POST"})
-     */
-    public function editcategoryAction(Request $request, Category $category, $id)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $category = $em->getRepository('BlogBundle:Catgeory')->find($id);
-        $form = $this->createForm(CategoryType::class, $category);
 
-        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
-            $em->flush();
-            $this->addFlash('success', 'Votre Category a été modifié avec succès !');
-
-            return $this->redirectToRoute('admin_category');
-        }
-
-        return $this->render('BlogBundle:Admin:admin-category-edit.html.twig', array(
-            'form' => $form->createView(),
-            'category' => $category
-        ));
-    }
     /**
      * Deletes a category entity.
      *
@@ -482,4 +379,90 @@ class PostController extends Controller
         return $this->redirectToRoute('admin_show');
     }
 
+    /**
+     * Finds and displays a post entity.
+     *
+     *
+     * @Route("/{id}", name="post_show", requirements={"id": "\d+"})
+     * @Method({"GET", "POST"})
+     */
+    public function showAction($id, Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $post = $em->getRepository('BlogBundle:Post')->getOnePostWithCategoryAndUserAndComment($id);
+        $comments = $em->getRepository('BlogBundle:Comment')->findBy(array('parent' => null, 'post' => $post));
+        // Add comment
+        $comment = new Comment();
+        $form = $this->get('form.factory')->create(CommentType::class, $comment, array(
+            'action' => $this->generateUrl('post_show', array('id' => $post->getId())),
+            'method' => 'POST',
+        ));
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+            $comment->setPost($post);
+            $em->persist($comment);
+            $em->flush();
+            $this->addFlash('success', 'Votre commentaire a été ajouté avec succès !');
+            return $this->redirectToRoute('post_show', array('id' => $post->getId()));
+        }
+        return $this->render('BlogBundle:Default:show.html.twig', array(
+            'form' => $form->createView(),
+            'post' => $post,
+            'comments' => $comments,
+        ));
+    }
+
+    /**
+     *
+     *
+     * @Route("/{id}/add_comment/{comment_parent_id}", name="add_comment_response", requirements={"id": "\d+"})
+     * @Method("POST")
+     */
+    public function addCommentResponseAction(Request $request, Post $post, $comment_parent_id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $commentParent = $em->getRepository('BlogBundle:Comment')->find($comment_parent_id);
+        // Add comment
+        $comment = new Comment();
+        $comment->setPost($post);
+        $comment->setLevel($commentParent->getLevel() + 1);
+        $comment->setParent($commentParent);
+        $form = $this->get('form.factory')->create(CommentType::class, $comment, array(
+            'action' => $this->generateUrl('add_comment_response', array('id' => $post->getId(), 'comment_parent_id' => $comment_parent_id)),
+            'method' => 'POST'
+        ));
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+            $em->persist($comment);
+            $em->flush();
+            $this->addFlash('success', 'Votre réponse a été ajouté avec succès !');
+            return $this->redirectToRoute('post_show', array('id' => $post->getId()));
+        }
+        return $this->render('BlogBundle:Default:add-comment.html.twig', array(
+            'form' => $form->createView()
+        ));
+    }
+
+    /**
+     * Displays a form to edit an existing category entity.
+     *
+     * @Route("/admin/category/edit/{id}", name="admin_category_edit")
+     * @Method({"GET", "POST"})
+     */
+    public function editcategoryAction(Request $request, Category $category, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $category = $em->getRepository('BlogBundle:Category')->find($id);
+        $form = $this->createForm(CategoryType::class, $category);
+
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+            $em->flush();
+            $this->addFlash('success', 'Votre Category a été modifié avec succès !');
+
+            return $this->redirectToRoute('admin_category');
+        }
+
+        return $this->render('BlogBundle:Admin:admin-category-edit.html.twig', array(
+            'form' => $form->createView(),
+            'category' => $category
+        ));
+    }
 }
