@@ -51,9 +51,6 @@ class PostController extends Controller
 
     }
 
-<<<<<<< HEAD
-=======
-
 
 
     /**
@@ -81,8 +78,8 @@ class PostController extends Controller
             $em->persist($comment);
             $em->flush();
             $this->addFlash('success', 'Votre réponse a été ajouté avec succès !');
->>>>>>> origin/master
-
+        }
+    }
 
 
     /**
@@ -426,10 +423,7 @@ class PostController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $post = $em->getRepository('BlogBundle:Post')->getOnePostWithCategoryAndUserAndComment($id);
-<<<<<<< HEAD
-=======
 
->>>>>>> origin/master
         $comments = $em->getRepository('BlogBundle:Comment')->findBy(array('parent' => null, 'post' => $post));
         // Add comment
         $comment = new Comment();
@@ -437,7 +431,7 @@ class PostController extends Controller
             'action' => $this->generateUrl('post_show', array('id' => $post->getId())),
             'method' => 'POST',
         ));
-<<<<<<< HEAD
+
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
             $comment->setPost($post);
             $em->persist($comment);
@@ -506,26 +500,7 @@ class PostController extends Controller
             'category' => $category
         ));
     }
-=======
-
-        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
-            $comment->setPost($post);
-
-            $em->persist($comment);
-            $em->flush();
-            $this->addFlash('success', 'Votre commentaire a été ajouté avec succès !');
-
-            return $this->redirectToRoute('post_show', array('id' => $post->getId()));
-        }
 
 
-        return $this->render('BlogBundle:Default:show.html.twig', array(
-            'form' => $form->createView(),
-            'post' => $post,
 
-            'comments' => $comments,
-        ));
-    }
-
->>>>>>> origin/master
 }
