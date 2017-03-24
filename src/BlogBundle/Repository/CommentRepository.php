@@ -36,7 +36,7 @@ class CommentRepository extends \Doctrine\ORM\EntityRepository
     public function getAllComments()
     {
         return $this->createQueryBuilder('p')
-            ->orderBy('p.createdAt', 'DESC')
+            ->orderBy('p.report', 'DESC')
             ->getQuery()
             ->getResult()
             ;
