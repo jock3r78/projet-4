@@ -21,7 +21,6 @@ class CommentType extends AbstractType
         $builder
             ->add('username', TextType::class)
             ->add('content', TextareaType::class)
-            ->add('email', EmailType::class)
             ->add('submit', SubmitType::class, ['label' => 'Commentez'])
         ;
     }
