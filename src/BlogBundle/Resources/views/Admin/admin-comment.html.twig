@@ -32,9 +32,9 @@
                             <td>{{ comment.content }}</td>
                             <td>{{ comment.report }}</td>
                             <td>
-                                <div class="col-sm-5"><a href="{{ path('admin_comment_edit', {id: comment.id}) }}"
+                                <div class="col-sm-3"><a href="{{ path('admin_comment_edit', {id: comment.id}) }}"
                                                          class="btn btn-info">Éditer</a></div>
-                                <div class="col-sm-5"><a href="{{ path('comment_moderate', {'id': comment.id}) }}"
+                                <div class="col-sm-4"><a href="{{ path('comment_moderate', {'id': comment.id}) }}"
                                                          class="btn btn-warning">Modération</a></div>
                                 <div class="col-sm-5">
                                     <button type="button" class="btn btn-danger" data-toggle="modal"
