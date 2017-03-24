@@ -380,28 +380,6 @@ span{
 	font-family: 'Open Sans', sans-serif;
 	text-align:left;
 }
- .comments form input[type="text"] {
-	padding: 10px 18px;
-	width: 50%;
-	background:#EAEAEA;
-	border: none;
-	outline: none;
-	margin-bottom: 1.1em;
-	font-size: 18px;
-	color: #636363;
-	font-weight: normal;
-}
-.comments form textarea {
-	padding: 10px 18px;
-	width: 100%;
-	background: #EAEAEA;
-	border: none;
-	outline: none;
-	margin-bottom: 1.1em;
-	font-size: 18px;
-	color: #636363;
-	font-weight: normal;
-}
 .comments form input[type="submit"] {
 	padding: 0.75em 2em;
 	color: #FFFFFF;
@@ -411,10 +389,10 @@ span{
 	display: block;
 	outline: none;
 	border: none;
-	width: 30%;	
+	width: 30%;
 	border-bottom:5px solid #CC4D00;
-    border-radius:5px;	
-}	
+	border-radius:5px;
+}
 .comments form input[type="submit"]:hover{
 	color: #fff;
 	background: #757575;
