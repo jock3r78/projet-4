@@ -22,7 +22,10 @@ class PostType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $this->user = $options['user'];
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
             $builder
                 ->add('name', TextType::class)
                 ->add('content', TextareaType::class)
@@ -41,7 +44,10 @@ class PostType extends AbstractType
                     )))
                 ->add('submit', SubmitType::class, ['label' => 'Valider'])
             ;
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
 
     }
 

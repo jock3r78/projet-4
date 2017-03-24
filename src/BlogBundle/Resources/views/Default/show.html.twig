@@ -2,6 +2,7 @@
 
 {% block body %}
     <!-- content -->
+<<<<<<< HEAD
 {%  if post.published == true %}
 
     <div class="container">
@@ -41,6 +42,46 @@
                     <h4>Ecrire un commentaire</h4>
                     <div class="col-md-6 contact">
 
+=======
+    {%  if post.published == true %}
+
+        <div class="container">
+            <div class="content">
+                <a href="{{ path('post_show', {id: post.id}) }}"><img src="{{ post.photo }}" class="img-responsive" alt="" /></a>
+                <i class="aeroplane"> </i>
+                <div class="travelling">
+                    <div class="col-md-10 travelling1">
+                        <h1><a href="{{ path('post_show', {id: post.id}) }}">{{ post.name }}</a></h1>
+                        <h2>Episode :  {{ post.episode }}</h2>
+                        <h5>Ecrit par {{ post.user.username }},  Publié le: {{ post.createdAt|date("m/d/Y") }}</h5>
+                    </div>
+                    <div class="col-md-1 travelling2">
+                    </div>
+                    <div class="clearfix"> </div>
+                    <p>{{ post.content|raw }}</p>
+                    <!-- comments -->
+                    <div class="comments">
+                        <h2>Vos Commentaires</h2>
+                        {% for flash_message in app.session.flashBag.get('report') %}
+                            <div class="clearfix"> </div>
+                            <div class="flash-report alert alert-danger alert-dismissable">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                {{ flash_message }}
+                            </div>
+                        {% endfor %}
+                        {% for flash_message in app.session.flashBag.get('success') %}
+                            <div class="clearfix"> </div>
+                            <div class="flash-success alert alert-success alert-dismissable">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                {{ flash_message }}
+                            </div>
+                        {% endfor %}
+                        <div class="clearfix"> </div>
+                        <hr>
+                        <!-- comments write -->
+                        <h4>Ecrire un commentaire</h4>
+                        <div class="col-md-6 contact">
+>>>>>>> origin/master
 
                             {{ form_start(form) }}
                             {{ form_errors(form) }}
@@ -66,19 +107,23 @@
 
                             {{ form_rest(form) }}
                             {{ form_end(form) }}
+<<<<<<< HEAD
+=======
+                        </div>
+                        <div class="clearfix"> </div>
+>>>>>>> origin/master
                     </div>
+                </div>
+                <!-- comments view-->
+                <div class="catagerious">
+                    {% import "BlogBundle:Default:macro.html.twig" as macros %}
+
+                    {{ macros.comments(comments) }}
                     <div class="clearfix"> </div>
                 </div>
             </div>
-            <!-- comments view-->
-            <div class="catagerious">
-                {% import "BlogBundle:Default:macro.html.twig" as macros %}
-
-                {{ macros.comments(comments) }}
-                <div class="clearfix"> </div>
         </div>
-    </div>
-    </div>
-{% endif %}
+    {% endif %}
     <!-- content -->
+
 {% endblock %}

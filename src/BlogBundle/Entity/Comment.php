@@ -52,7 +52,10 @@ class Comment
      */
     private $username;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
     /**
      * @var string
      *

@@ -17,6 +17,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 
@@ -50,6 +51,37 @@ class PostController extends Controller
 
     }
 
+<<<<<<< HEAD
+=======
+
+
+
+    /**
+     *
+     *
+     * @Route("/{id}/add_comment/{comment_parent_id}", name="add_comment_response", requirements={"id": "\d+"})
+     * @Method("POST")
+     */
+    public function addCommentResponseAction(Request $request, Post $post, $comment_parent_id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $commentParent = $em->getRepository('BlogBundle:Comment')->find($comment_parent_id);
+        // Add comment
+        $comment = new Comment();
+        $comment->setPost($post);
+        $comment->setLevel($commentParent->getLevel() + 1);
+        $comment->setParent($commentParent);
+        $form = $this->get('form.factory')->create(CommentType::class, $comment, array(
+            'action' => $this->generateUrl('add_comment_response', array('id' => $post->getId(), 'comment_parent_id' => $comment_parent_id)),
+            'method' => 'POST'
+        ));
+
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+
+            $em->persist($comment);
+            $em->flush();
+            $this->addFlash('success', 'Votre réponse a été ajouté avec succès !');
+>>>>>>> origin/master
 
 
 
@@ -294,6 +326,10 @@ class PostController extends Controller
         $com->setReport($report);
         $em->persist($com);
         $em->flush();
+        $this->addFlash(
+            'report',
+            'Votre signalement a été pris en compte, Merci.'
+        );
         return $this->redirectToRoute('post_show', array(
             'id' => $post->getId()
         ));
@@ -390,6 +426,10 @@ class PostController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $post = $em->getRepository('BlogBundle:Post')->getOnePostWithCategoryAndUserAndComment($id);
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
         $comments = $em->getRepository('BlogBundle:Comment')->findBy(array('parent' => null, 'post' => $post));
         // Add comment
         $comment = new Comment();
@@ -397,6 +437,7 @@ class PostController extends Controller
             'action' => $this->generateUrl('post_show', array('id' => $post->getId())),
             'method' => 'POST',
         ));
+<<<<<<< HEAD
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
             $comment->setPost($post);
             $em->persist($comment);
@@ -465,4 +506,26 @@ class PostController extends Controller
             'category' => $category
         ));
     }
+=======
+
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+            $comment->setPost($post);
+
+            $em->persist($comment);
+            $em->flush();
+            $this->addFlash('success', 'Votre commentaire a été ajouté avec succès !');
+
+            return $this->redirectToRoute('post_show', array('id' => $post->getId()));
+        }
+
+
+        return $this->render('BlogBundle:Default:show.html.twig', array(
+            'form' => $form->createView(),
+            'post' => $post,
+
+            'comments' => $comments,
+        ));
+    }
+
+>>>>>>> origin/master
 }
