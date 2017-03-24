@@ -22,55 +22,26 @@ class PostType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $this->user = $options['user'];
-        if($this->user == 'Jeanforteroche'){
-            $builder
-                ->add('name', TextType::class)
-                ->add('content', TextareaType::class)
-                ->add('category', EntityType::class, ['class' => Category::class, 'choice_label' => 'name'])
-                ->add('user', EntityType::class, array(
-                    'class' => User::class,
-                    'choice_label' => 'username',
-                ))
-                ->add('episode', IntegerType::class)
-                ->add('photo', TextType::class)
-                ->add('photoresume', TextType::class)
-                ->add('published', ChoiceType::class, array(
-                    'choices' => array(
-                        'Oui' => true,
-                        'Non' => false,
-                    )))
-                ->add('submit', SubmitType::class, ['label' => 'Valider'])
-            ;
-        }
-        else{
-            $builder
-                ->add('name', TextType::class)
-                ->add('content', TextareaType::class)
-                ->add('category', EntityType::class, ['class' => Category::class, 'choice_label' => 'name'])
-                ->add('user', EntityType::class, array(
-                    'class' => User::class,
-                    'query_builder' => function (EntityRepository $er) {
-                        return $er->createQueryBuilder('u')
-                            ->where('u.username = :username')
-                            ->setParameter('username', $this->user);
-                        /* $er->createQueryBuilder('u')
-                             ->where('u.roles LIKE :roles')
-                             ->setParameter('roles', '%"'.$this->user.'"%');*/
-                    },
-                    'choice_label' => 'username',
-                ))
-                ->add('episode', IntegerType::class)
-                ->add('photo', TextType::class)
-                ->add('photoresume', TextType::class)
-                ->add('published', ChoiceType::class, array(
-                    'choices' => array(
-                        'Oui' => true,
-                        'Non' => false,
-                    )))
 
+            $builder
+                ->add('name', TextType::class)
+                ->add('content', TextareaType::class)
+                ->add('category', EntityType::class, ['class' => Category::class, 'choice_label' => 'name'])
+                ->add('user', EntityType::class, array(
+                    'class' => User::class,
+                    'choice_label' => 'username',
+                ))
+                ->add('episode', IntegerType::class)
+                ->add('photo', TextType::class)
+                ->add('photoresume', TextType::class)
+                ->add('published', ChoiceType::class, array(
+                    'choices' => array(
+                        'Oui' => true,
+                        'Non' => false,
+                    )))
                 ->add('submit', SubmitType::class, ['label' => 'Valider'])
             ;
-        }
+
 
     }
 
