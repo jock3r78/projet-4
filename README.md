@@ -1,4 +1,16 @@
-projet-4
-========
+projet-3 
+=======
 
-A Symfony project created on March 13, 2017, 8:20 am.
+OpenClassrooms Blog Ecrivain 
+===============================
+
+Installation
+---------
+```bash
+composer install
+php bin/console doctrine:database:create
+php bin/console doctrine:schema:update --force
+php bin/console doctrine:fixtures:load
+php bin/console server:run
+```
+
