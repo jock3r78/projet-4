@@ -90,10 +90,10 @@ Pour louer une voiture, on aime bien AutoEscape qui compare beaucoup de loueurs 
             ),
             array(
                 'name' => 'ROAD TRIP DANS LES DOLOMITES : AU CŒUR DES ALPES ITALIENNES !',
-                'content' => 'Il est temps de reprendre la route ! C’est un voyage tout à fait unique que nous partageons : l’Italie, plus précisément les Dolomites au cœur du Sud-Tyrol 🇮🇹 !
+                'content' => 'Il est temps de reprendre la route ! C’est un voyage tout à fait unique que nous partageons : l’Italie, plus précisément les Dolomites au cœur du Sud-Tyrol !
 Les Dolomites ! Ce seul nom trottait dans nos têtes depuis quelques années déjà. Les Dolomites ! Icônes et montagnes italiennes, récemment classées par l’UNESCO au Patrimoine Mondial !
 Nous avons parcouru durant quelques jours le Sud-Tyrol, logé tout au Nord de la «Grande Botte». Région où les saveurs alpines et méditerranéennes se télescopent et donnent une saveur toute particulière à l’exploration.
-Belles adresses, inspiration photographique bien sûr, routes sublimes et petite surprise à l’italienne : prise de vue aérienne 🙊 !!!!
+Belles adresses, inspiration photographique bien sûr, routes sublimes et petite surprise à l’italienne : prise de vue aérienne  !!!!
 Mini-guide pratique
 		Vous pouvez trouver un billet aller-retour Paris-Venise dans les 35€ avec Ryanair ou Easyjet en vous y prenant à l’avance ! Transavia et Vueling ont de bons prix aussi. Les aéroports les plus proches sont Innsbruck ou Vérone, et bonne nouvelle : il y a des vols directs Paris-Vérone sur Transavia ! Sinon, un peu plus loin, cela peut être aussi Milan (Bergame ou Malpensa), ou encore Munich.
 		Pour la location de voiture, pas de secret : il faut comparer. Regardez sur AutoEscape ou RentalCars ! Passer par des courtiers et/ou des comparateurs vous donne toujours les meilleurs prix !
@@ -144,7 +144,7 @@ L’entrée pour la séance d’entraînement du matin (durée : 1 heure environ
                 'name' => 'ROAD TRIP EN CATALOGNE : LES PLUS BELLES ROUTES ET PAYSAGES DES PYRÉNÉES !',
                 'content' => 'Nous avons fait un beau road trip d’automne d’une semaine dans le Nord de la Catalogne !
 La lumière et les couleurs catalanes ont su inspirer les plus grands artistes. Joan Miró, Pablo Picasso, Salvador Dalí, Antoni Tàpies,… Picasso parle de la Catalogne comme d’une terre «de douces et insolentes beautés».
-C’est sur ces terres du Nord-Est de l’Espagne que nous nous sommes perdus quelques jours, en octobre. Partons explorer les Pyrénées catalanes et ses superbes couleurs d’automne 🍃🍂
+C’est sur ces terres du Nord-Est de l’Espagne que nous nous sommes perdus quelques jours, en octobre. Partons explorer les Pyrénées catalanes et ses superbes couleurs d’automne
 Routes de montagnes, lacs, forêts, petits villages et jolies adresses…
 
 ROAD TRIP EN CATALOGNE : LA VIDÉO !
