@@ -71,7 +71,7 @@ class PostController extends Controller
      * Finds and displays a post entity.
      *
      *
-     * @Route("/{id}", name="post_show", requirements={"id": "\d+"})
+     * @Route("/episode/{id}", name="post_show", requirements={"id": "\d+"})
      * @Method({"GET", "POST"})
      */
     public function showAction($id, Request $request)
@@ -85,7 +85,8 @@ class PostController extends Controller
             'action' => $this->generateUrl('post_show', array('id' => $post->getId())),
             'method' => 'POST',
         ));
-        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
             $comment->setPost($post);
             $em->persist($comment);
             $em->flush();
@@ -102,28 +103,33 @@ class PostController extends Controller
     /**
      *
      *
-     * @Route("/{id}/add_comment/{comment_parent_id}", name="add_comment_response", requirements={"id": "\d+"})
+     * @Route("/comment-reponse/{id}", name="add_comment_response")
      * @Method("POST")
      */
-    public function addCommentResponseAction(Request $request, Post $post, $comment_parent_id)
+    public function addCommentResponseAction(Request $request, Comment $comment_parent)
     {
         $em = $this->getDoctrine()->getManager();
-        $commentParent = $em->getRepository('BlogBundle:Comment')->find($comment_parent_id);
         // Add comment
         $comment = new Comment();
-        $comment->setPost($post);
-        $comment->setLevel($commentParent->getLevel() + 1);
-        $comment->setParent($commentParent);
+        $comment->setParent($comment_parent);
         $form = $this->get('form.factory')->create(CommentType::class, $comment, array(
-            'action' => $this->generateUrl('add_comment_response', array('id' => $post->getId(), 'comment_parent_id' => $comment_parent_id)),
-            'method' => 'POST'
-        ));
-        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
-            $em->persist($comment);
-            $em->flush();
-            $this->addFlash('success', 'Votre réponse a été ajouté avec succès !');
-            return $this->redirectToRoute('post_show', array('id' => $post->getId()));
+            'action' => $this->generateUrl('add_comment_response', array('id' => $comment_parent->getId())
+        )));
+        $form->handleRequest($request);
+        if ($form->isSubmitted() ) {
+            if ($form->isValid()) {
+                $em->persist($comment);
+                $em->flush();
+                $this->addFlash('success', 'Votre réponse a été ajouté avec succès !');
+
+            } else {
+                $this->addFlash('error', 'veuillez remplir les champs dans le formulaire de réponse');
+            }
+            return $this->redirectToRoute('post_show', array('id' => $comment_parent->getPost()->getId()));
+
+
         }
+
         return $this->render('BlogBundle:Default:add-comment.html.twig', array(
             'form' => $form->createView()
         ));
