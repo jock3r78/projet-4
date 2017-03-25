@@ -47,7 +47,6 @@ class Comment
      *
      * @ORM\Column(name="username", type="string", length=255)
      * @Assert\Length(min=3, minMessage="merci de mettre plus de 3 caractères")
-     * @Assert\NotNull(message="Merci de remplir ce champs")
      * @Assert\NotBlank(message="Merci de remplir ce champs")
      */
     private $username;
@@ -57,7 +56,6 @@ class Comment
      *
      * @ORM\Column(name="content", type="text")
      * @Assert\NotBlank(message="Merci de remplir ce champs")
-     * @Assert\NotNull(message="Merci de remplir ce champs")
      *
      */
     private $content;
@@ -247,6 +245,10 @@ class Comment
     public function setParent(\BlogBundle\Entity\Comment $parent = null)
     {
         $this->parent = $parent;
+        if ($parent) {
+            $this->post = $parent->getPost();
+            $this->level = $parent->getLevel() + 1;
+        }
 
         return $this;
     }
