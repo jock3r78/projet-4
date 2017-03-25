@@ -30,7 +30,7 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
         $user->setEmail('jeanne@forteroche.com');
         $user->setPlainPassword('auteur');
         $user->setEnabled(true);
-        $user->setRoles(array('ROLE_AUTEUR'));
+        $user->setRoles(array('ROLE_ADMIN'));
 
         // Update the user
         $userManager->updateUser($user, true);
