@@ -15,10 +15,6 @@ class LoadCategoryData implements FixtureInterface
         $category->setNumberPost(0);
         $manager->persist($category);
 
-        $category = new Category();
-        $category->setName('Episode');
-        $category->setNumberPost(0);
-        $manager->persist($category);
 
         $category = new Category();
         $category->setName('Introduction');
