@@ -10,7 +10,6 @@ namespace BlogBundle\DataFixtures\ORM;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use BlogBundle\Entity\Post;
-use BlogBundle\Entity\Category;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -213,14 +212,10 @@ Mémo Calendrier : Haute Saison : Avril / Mai / Août / Novembre Saison inte
         $user->setPlainPassword('admin');
         $user->setEnabled(true);
         $user->setRoles(array('ROLE_ADMIN'));
-        // New Category
-        $category = new Category();
-        $category->setName('Episode');
-        $category->setNumberPost(0);
+
         foreach ($postsData as $postData) {
             $post = new Post();
             $post->setUser($user);
-            $post->setCategory($category);
             $post->setName($postData['name']);
             $post->setContent($postData['content']);
             $post->setEpisode($postData['episode']);

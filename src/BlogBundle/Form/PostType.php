@@ -2,7 +2,6 @@
 
 namespace BlogBundle\Form;
 
-use BlogBundle\Entity\Category;
 use BlogBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
@@ -26,7 +25,6 @@ class PostType extends AbstractType
             $builder
                 ->add('name', TextType::class)
                 ->add('content', TextareaType::class)
-                ->add('category', EntityType::class, ['class' => Category::class, 'choice_label' => 'name'])
                 ->add('user', EntityType::class, array(
                     'class' => User::class,
                     'choice_label' => 'username',

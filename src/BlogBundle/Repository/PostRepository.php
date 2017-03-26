@@ -13,8 +13,6 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
     public function getAuthorPosts($id)
     {
         return $this->createQueryBuilder('p')
-            ->leftJoin("p.category", "c")
-            ->addSelect("c")
             ->where('p.user = :id')
             ->setParameter('id', $id)
             ->orderBy('p.createdAt', 'DESC')
@@ -28,7 +26,6 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
         return $this->createQueryBuilder('p')
             ->leftJoin("p.user", "u")
             ->addSelect("u")
-            ->where('p.category = :id')
             ->setParameter('id', $id)
             ->orderBy('p.createdAt', 'DESC')
             ->getQuery()
@@ -39,8 +36,6 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
     public function getPostWithCategoryAndUserQuery()
     {
         return $this->createQueryBuilder('p')
-            ->leftJoin("p.category", "c")
-            ->addSelect("c")
             ->leftJoin("p.user", "u")
             ->addSelect("u")
             ->orderBy('p.createdAt', 'DESC')
@@ -50,8 +45,6 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
     public function getPostWithCategoryAndUser()
     {
         return $this->createQueryBuilder('p')
-            ->leftJoin("p.category", "c")
-            ->addSelect("c")
             ->leftJoin("p.user", "u")
             ->addSelect("u")
             ->orderBy('p.createdAt', 'DESC')
@@ -63,8 +56,6 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
     public function getOnePostWithCategoryAndUserAndComment($id)
     {
         return $this->createQueryBuilder('p')
-            ->leftJoin("p.category", "c")
-            ->addSelect("c")
             ->leftJoin("p.user", "u")
             ->addSelect("u")
             ->leftJoin("p.comments", "cm")

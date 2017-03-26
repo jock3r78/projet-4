@@ -32,14 +32,6 @@ class Post
 
 
     /**
-     * @ORM\ManyToOne(targetEntity="Category", inversedBy="posts", cascade={"persist"})
-     * @Assert\NotNull()
-     * @Assert\NotBlank()
-     */
-    private $category;
-
-
-    /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
@@ -299,29 +291,6 @@ class Post
         return $this->user;
     }
 
-    /**
-     * Set category
-     *
-     * @param \BlogBundle\Entity\Category $category
-     *
-     * @return Post
-     */
-    public function setCategory(\BlogBundle\Entity\Category $category = null)
-    {
-        $this->category = $category;
-
-        return $this;
-    }
-
-    /**
-     * Get category
-     *
-     * @return \BlogBundle\Entity\Category
-     */
-    public function getCategory()
-    {
-        return $this->category;
-    }
 
 
     /**

@@ -12,7 +12,6 @@ use BlogBundle\Entity\Post;
 use BlogBundle\Form\CommentType;
 use BlogBundle\Form\PostType;
 use BlogBundle\Entity\User;
-use BlogBundle\Entity\Category;
 use BlogBundle\Entity\Comment;
 use FOS\UserBundle\Doctrine\UserManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;

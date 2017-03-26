@@ -12,9 +12,9 @@ use BlogBundle\BlogBundle;
 use BlogBundle\Entity\Post;
 use BlogBundle\Form\CommentType;
 use BlogBundle\Form\PostType;
-use BlogBundle\Form\CategoryType;
+
 use BlogBundle\Entity\User;
-use BlogBundle\Entity\Category;
+
 use BlogBundle\Entity\Comment;
 use FOS\UserBundle\Doctrine\UserManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -75,6 +75,8 @@ class AdminController extends Controller
             'form' => $form->createView(),
         ));
     }
+
+
     /**
      * Displays a form to edit an existing post entity.
      *
@@ -119,40 +121,7 @@ class AdminController extends Controller
 
 
 
-    /**
-     * Deletes a category entity.
-     *
-     * @Route("/admin/delete-category", options={"expose"=true}, name="admin_category_delete")
-     * @Method("POST")
-     */
-    public function deleteCategoryAction(Request $request)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $id = $request->request->get('CATEGORY_ID');
-        $category = $em->getRepository('BlogBundle:Category')->find($id);
-        $em->remove($category);
-        $this->addFlash('success', 'Votre catégorie a été supprimé avec succès !');
-        $em->flush($category);
-        return $this->redirectToRoute('admin_category');
-    }
 
-    /**
-     * Displays admin panel category.
-     *
-     * @Route("/admin/category", name="admin_category")
-     * @Security("has_role('ROLE_ADMIN')")
-     * @Method({"GET", "POST"})
-     */
-    public function categoryadminAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-        $categorys = $em->getRepository('BlogBundle:Category')->getAllCategorys();
-        $form = $this->get('form.factory')->create();
-        return $this->render('BlogBundle:Admin:admin-category.html.twig', array(
-            'category' => $categorys,
-            'form' => $form->createview(),
-        ));
-    }
 
     /**
      * Deletes a post entity.
@@ -173,29 +142,10 @@ class AdminController extends Controller
         $em->flush($post);
         return $this->redirectToRoute('admin_show');
     }
-    /**
-     * Displays a form to edit an existing category entity.
-     *
-     * @Route("/admin/category/edit/{id}", name="admin_category_edit")
-     * @Method({"GET", "POST"})
-     */
-    public function editcategoryAction(Request $request, Category $category, $id)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $category = $em->getRepository('BlogBundle:Category')->find($id);
-        $form = $this->createForm(CategoryType::class, $category);
 
-        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
-            $em->flush();
-            $this->addFlash('success', 'Votre Category a été modifié avec succès !');
 
-            return $this->redirectToRoute('admin_category');
-        }
 
-        return $this->render('BlogBundle:Admin:admin-category-edit.html.twig', array(
-            'form' => $form->createView(),
-            'category' => $category
-        ));
-    }
+
+
 
 }
