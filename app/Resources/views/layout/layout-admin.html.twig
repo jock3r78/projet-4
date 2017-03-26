@@ -119,6 +119,27 @@
                     <h1 class="page-header"></h1>
                 </div>
             </div>
+            {% for flash_message in app.session.flashBag.get('report') %}
+                <div class="clearfix"> </div>
+                <div class="flash-report alert alert-danger alert-dismissable">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    {{ flash_message }}
+                </div>
+            {% endfor %}
+            {% for flash_message in app.session.flashBag.get('success') %}
+                <div class="clearfix"> </div>
+                <div class="flash-success alert alert-success alert-dismissable">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    {{ flash_message }}
+                </div>
+            {% endfor %}
+            {% for flash_message in app.session.flashBag.get('error') %}
+                <div class="clearfix"> </div>
+                <div class="flash-success alert alert-success alert-dismissable">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    {{ flash_message }}
+                </div>
+            {% endfor %}
             {% block body %}
 
             {% endblock %}
